@@ -24,7 +24,7 @@ const FormInput: FC<FormInputProps> = ({
         placeholder={placeholder}
         type={type}
         {...register}
-        className="border dark:border-[#5a5a8a] rounded-[10px] px-2 py-1 h-11 dark:bg-[#32324d] focus:outline-none"
+        className="border bg-white rounded-[10px] px-2 py-1 h-11 focus:outline-none"
       />
     </div>
   );

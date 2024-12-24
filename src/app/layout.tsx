@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "../shared/styles/globals.css";
+import "../shared/styles/reset.css";
+import Header from "@/widgets/header/ui/header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="w-[85%] mx-auto bg-white dark:text-black">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

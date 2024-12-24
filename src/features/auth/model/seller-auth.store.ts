@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { isJwtAuth } from "./token.model";
 
 interface SellerStore {
   isSellerAuth: boolean;
@@ -7,7 +8,7 @@ interface SellerStore {
 }
 
 export const useSellerStore = create<SellerStore>((set) => ({
-  isSellerAuth: Boolean(),
+  isSellerAuth: Boolean(isJwtAuth("seller")),
   login: () => set({ isSellerAuth: true }),
   logout: () => {
     set({ isSellerAuth: false });
