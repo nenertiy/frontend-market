@@ -10,7 +10,7 @@ const Button: FC<ButtonProps> = ({ children, onClick }) => {
     <div>
       <button
         onClick={onClick}
-        className="w-full h-11 bg-[#303030] dark:bg-[#7373a4] hover:bg-[#222222] dark:hover:bg-[#646499]  hover:scale-[1.02] transition ease-in-out duration-300 rounded-[10px] px-2 py-1 text-white dark:text-black text-base">
+        className="w-full h-11 bg-[rgb(194,243,119)] hover:bg-[rgb(188,236,116)]   hover:scale-[1.02] transition ease-in-out duration-300 rounded-[10px] px-2 py-1 text-black text-base">
         {children}
       </button>
     </div>

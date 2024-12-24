@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC } from "react";
 import FormInput from "../Input/FormInput";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,7 +14,7 @@ export interface Field {
   name: string;
   label?: string;
   placeholder?: string;
-  type?: "text" | "password" | "email";
+  type?: "text" | "password" | "email" | "phone";
   required: boolean;
 }
 
@@ -22,7 +24,7 @@ const Form: FC<FormProps> = ({ children, fields, onSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 bg-gray-100 dark:bg-[#1e1e2e] sm:px-8 sm:py-10 px-6 py-8 rounded-2xl justify-center w-[85%] max-w-80 box-content">
+      className="flex flex-col gap-6 bg-[rgb(248,249,254)] sm:px-8 sm:py-10 px-6 py-8 rounded-2xl justify-center w-[85%] max-w-96 box-content">
       {fields.map((field) => (
         <FormInput
           key={field.name}

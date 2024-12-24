@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { apiClient } from "../../../shared/api";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 export const setToken = (token: string, refreshToken: string | null = null) => {
   Cookies.set("token", token, { path: "/", secure: true, sameSite: "Strict" });
@@ -28,7 +28,30 @@ export const getRefreshToken = () => {
   return Cookies.get("refreshToken");
 };
 
-export const decodeJwtToken = () => {};
+interface CustomJwtPayload extends JwtPayload {
+  type?: string;
+}
+
+export const decodeJwtToken = () => {
+  const token = getToken()?.toString();
+
+  if (token) {
+    try {
+      const decode: CustomJwtPayload = jwtDecode(token);
+      return decode.type;
+    } catch (error) {
+      console.error("Failed to decode JWT:", error);
+      console.log("Invalid token format");
+    }
+  }
+};
+
+export const isJwtAuth = (type: "client" | "seller") => {
+  const jwtType = decodeJwtToken();
+  if (jwtType === type) {
+    return true;
+  }
+};
 
 // export const isAuthenticated = async (): Promise<boolean> => {
 //   const token = getToken();
