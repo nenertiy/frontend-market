@@ -12,4 +12,10 @@ const nextConfig: NextConfig = {
   },
 };
 
+module.exports = {
+  images: {
+    domains: ["store.storeimages.cdn-apple.com", "example.com"], // Добавьте нужный домен
+  },
+};
+
 export default nextConfig;
