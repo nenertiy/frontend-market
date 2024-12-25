@@ -17,6 +17,12 @@ const SellerSignUpForm = () => {
       type: "text",
       required: false,
     },
+    {
+      name: "shopName",
+      label: "Название магазина",
+      type: "text",
+      required: true,
+    },
     { name: "INN", label: "ИНН", type: "text", required: true },
     { name: "phone", label: "Телефон", type: "phone", required: true },
     { name: "email", label: "Почта", type: "email", required: true },
