@@ -11,3 +11,8 @@ export const fetchProducts = async (
   );
   return response.data;
 };
+
+export const fetchProduct = async (id: string): Promise<Product> => {
+  const response = await apiClient.get(`/products/${id}`);
+  return response.data;
+};

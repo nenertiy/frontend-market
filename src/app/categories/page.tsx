@@ -15,7 +15,7 @@ const CategoriesPage = () => {
   };
 
   const { data: categories, isSuccess } = useQuery({
-    queryKey: ["products", searchValue],
+    queryKey: ["categories", searchValue],
     queryFn: () => fetchCategories(searchValue),
   });
   return (

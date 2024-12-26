@@ -7,3 +7,8 @@ export const fetchCategories = async (
   const response = await apiClient.get(`/product-categories?search=${search}`);
   return response.data;
 };
+
+export const fetchCategory = async (id: string) => {
+  const response = await apiClient.get(`/product-categories/${id}`);
+  return response.data;
+};
