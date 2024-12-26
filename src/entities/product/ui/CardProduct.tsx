@@ -1,3 +1,4 @@
+import { addToCart } from "@/entities/cart/api";
 import Button from "@/shared/ui/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,9 +9,16 @@ interface CardProductProps {
   id: string;
   title: string;
   price: number;
+  onClick: () => void;
 }
 
-const CardProduct: FC<CardProductProps> = ({ img, id, title, price }) => {
+const CardProduct: FC<CardProductProps> = ({
+  img,
+  id,
+  title,
+  price,
+  onClick,
+}) => {
   return (
     <div className="xl:w-[400px] lg:w-[380px] 850:w-[350px] md:w-[320px] sm:w-[260px] w-[300px] flex flex-col gap-4 h-[460px] ">
       <Link
@@ -29,7 +37,7 @@ const CardProduct: FC<CardProductProps> = ({ img, id, title, price }) => {
         <div className="text-2xl">{title}</div>
         <div className="font-semibold text-lg">{price} RUB</div>
         <div className="mt-4">
-          <Button>Добавить в корзину</Button>
+          <Button onClick={onClick}>Добавить в корзину</Button>
         </div>
       </div>
     </div>

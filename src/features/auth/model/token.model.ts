@@ -30,15 +30,21 @@ export const getRefreshToken = () => {
 
 interface CustomJwtPayload extends JwtPayload {
   type?: string;
+  id?: string;
 }
 
-export const decodeJwtToken = () => {
+export const decodeJwtToken = (type: boolean) => {
   const token = getToken()?.toString();
 
   if (token) {
     try {
       const decode: CustomJwtPayload = jwtDecode(token);
-      return decode.type;
+
+      if (type) {
+        return decode.type;
+      } else {
+        return decode.id;
+      }
     } catch (error) {
       console.error("Failed to decode JWT:", error);
       console.log("Invalid token format");
@@ -47,7 +53,7 @@ export const decodeJwtToken = () => {
 };
 
 export const isJwtAuth = (type: "client" | "seller") => {
-  const jwtType = decodeJwtToken();
+  const jwtType = decodeJwtToken(true);
   if (jwtType === type) {
     return true;
   }

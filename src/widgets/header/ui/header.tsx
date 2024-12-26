@@ -32,7 +32,7 @@ const Header = () => {
         </div>
         <Link
           className="text-sm bg-[rgb(248,249,254)] hover:bg-[rgb(240,241,246)] transition duration-300 ease-in-out px-2 py-1 rounded-lg"
-          href={SELLER_SIGN_IN}>
+          href={isSellerAuth ? DASHBOARD : SELLER_SIGN_IN}>
           Для для продавца
         </Link>
       </div>
