@@ -26,7 +26,7 @@ const CardCart: FC<CardCartProps> = ({
     <div className="bg-[rgb(248,249,254)] rounded-3xl p-5 flex flex-col sm:flex-row gap-4 items-center shadow-md">
       <div className="w-[260px] h-[260px]">
         <img
-          className="rounded-xl"
+          className="rounded-xl w-[260px] aspect-square"
           width={250}
           height={250}
           src={img}

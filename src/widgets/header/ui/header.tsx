@@ -14,11 +14,14 @@ import {
   DASHBOARD,
   HOME,
   ORDER,
+  PROFILE,
   SELLER_SIGN_IN,
 } from "@/shared/router/router";
 import Icon from "@/shared/ui/Icon/Icon";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useSellerStore } from "@/features/auth/model/seller-auth.store";
+import Button from "@/shared/ui/Button/Button";
+import { authModel } from "@/features/auth/model/auth.model";
 
 const Header = () => {
   const { isClientAuth } = useClientStore();
@@ -79,13 +82,17 @@ const Header = () => {
                   ? CLIENT_SIGN_IN
                   : isSellerAuth
                   ? DASHBOARD
-                  : isClientAuth
-                  ? HOME
                   : ""
+                // isClientAuth
+                // ? PROFILE
+                // : ""
               }
               img={user}
               desc="user"
             />
+            {(isClientAuth || isSellerAuth) && (
+              <Button onClick={() => authModel.logout()}>Выход</Button>
+            )}
             {/* При многоразовом нажатии на иконку при селлере он дублирует адрес */}
           </div>
         </div>

@@ -12,9 +12,9 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
   const handleAddToCart = async (clientId: string, productId: string) => {
     try {
       await addToCart(clientId, productId);
-      alert("Success");
+      // alert("Success");
     } catch {
-      alert("Error");
+      // alert("Error");
     }
   };
   const { userId } = useClientStore();
