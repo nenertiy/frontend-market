@@ -10,14 +10,17 @@ import Link from "next/link";
 import {
   CART,
   CLIENT_SIGN_IN,
+  DASHBOARD,
   HOME,
   SELLER_SIGN_IN,
 } from "@/shared/router/router";
 import Icon from "@/shared/ui/Icon/Icon";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
+import { useSellerStore } from "@/features/auth/model/seller-auth.store";
 
 const Header = () => {
   const { isClientAuth } = useClientStore();
+  const { isSellerAuth } = useSellerStore();
   return (
     <div className="flex flex-col mt-2">
       <div className="flex justify-end gap-2">
@@ -62,10 +65,19 @@ const Header = () => {
               />
             )}
             <Icon
-              link={CLIENT_SIGN_IN}
+              link={
+                !isClientAuth && !isSellerAuth
+                  ? CLIENT_SIGN_IN
+                  : isSellerAuth
+                  ? DASHBOARD
+                  : isClientAuth
+                  ? HOME
+                  : ""
+              }
               img={user}
               desc="user"
             />
+            {/* При многоразовом нажатии на иконку при селлере он дублирует адрес */}
           </div>
         </div>
       </div>
