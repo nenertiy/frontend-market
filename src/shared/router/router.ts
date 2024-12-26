@@ -7,4 +7,5 @@ export const MENU = "/menu";
 export const CATEGORIES = "/categories";
 export const PROFILE = "/profile";
 export const CART = "/cart";
+export const ORDER = "/order";
 export const DASHBOARD = "seller/dashboard";

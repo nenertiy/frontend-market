@@ -1,21 +1,21 @@
 "use client";
 
-import { getCart } from "@/entities/cart/api";
-import CartProductList from "@/widgets/cart/ui/CartProductList";
+import { getOrder } from "@/entities/order/api";
+import OrderList from "@/widgets/order/ui/OrderList";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-const CartPage = () => {
+const OrderPage = () => {
   const { userId } = useClientStore();
 
   const {
-    data: cart,
+    data: orders,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["cart", userId],
-    queryFn: () => getCart(userId),
+    queryKey: ["order", userId],
+    queryFn: () => getOrder(userId),
     enabled: !!userId,
   });
 
@@ -23,10 +23,10 @@ const CartPage = () => {
     return <div>Загрузка...</div>;
   }
 
-  if (isError || !cart || cart.cartProduct.length < 1) {
+  if (isError || !orders || orders.length < 1) {
     return (
       <div className="bg-[rgb(248,249,254)] px-3 py-2 rounded-xl text-2xl font-semibold mb-3">
-        Корзина пуста
+        У вас пока нет заказов
       </div>
     );
   }
@@ -34,16 +34,13 @@ const CartPage = () => {
   return (
     <div>
       <div className="bg-[rgb(248,249,254)] px-3 py-2 rounded-xl text-2xl font-semibold mb-3">
-        Корзина
+        Заказы
       </div>
       <div>
-        <CartProductList
-          cart={cart}
-          userId={userId}
-        />
+        <OrderList orders={orders} />
       </div>
     </div>
   );
 };
 
-export default CartPage;
+export default OrderPage;

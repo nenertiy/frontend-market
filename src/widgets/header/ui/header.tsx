@@ -3,6 +3,7 @@
 import React from "react";
 import logo from "../../../shared/img/logo.svg";
 import cart from "../../../shared/img/cart.svg";
+import order from "../../../shared/img/order.svg";
 import user from "../../../shared/img/user.svg";
 import Image from "next/image";
 import { LINKS } from "@/shared/constants/links";
@@ -12,6 +13,7 @@ import {
   CLIENT_SIGN_IN,
   DASHBOARD,
   HOME,
+  ORDER,
   SELLER_SIGN_IN,
 } from "@/shared/router/router";
 import Icon from "@/shared/ui/Icon/Icon";
@@ -57,6 +59,13 @@ const Header = () => {
             ))}
           </div>
           <div className="flex gap-6">
+            {isClientAuth && (
+              <Icon
+                link={ORDER}
+                img={order}
+                desc="order"
+              />
+            )}
             {isClientAuth && (
               <Icon
                 link={CART}

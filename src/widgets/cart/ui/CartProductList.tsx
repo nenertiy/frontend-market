@@ -1,8 +1,11 @@
 import { addToCart, decreaseCart, removeFromCart } from "@/entities/cart/api";
 import { Cart } from "@/entities/cart/types";
 import CardCart from "@/entities/cart/ui/CardCart";
+import { makeOrder } from "@/entities/order/api";
+import { ORDER } from "@/shared/router/router";
 import Button from "@/shared/ui/Button/Button";
 import { useQueryClient } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 import React, { FC } from "react";
 
 interface CartProductListProps {
@@ -37,6 +40,13 @@ const CartProductList: FC<CartProductListProps> = ({ cart, userId }) => {
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
   };
 
+  const postOrder = async () => {
+    await makeOrder(userId);
+    queryClient.invalidateQueries({ queryKey: ["order", userId] });
+    queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    redirect(ORDER);
+  };
+
   return (
     <div className="flex lg:flex-row flex-col lg:justify-between justify-center lg:items-start items-center gap-6">
       <div className="flex flex-col gap-6 w-full lg:w-2/3 lg:max-h-[800px] lg:overflow-y-auto">
@@ -62,7 +72,7 @@ const CartProductList: FC<CartProductListProps> = ({ cart, userId }) => {
         <div className="text-lg font-medium mb-6">
           Сумма: <span>{totalPrice} ₽</span>
         </div>
-        <Button onClick={() => console.log("Заказать")}>Заказать</Button>
+        <Button onClick={postOrder}>Заказать</Button>
       </div>
     </div>
   );
