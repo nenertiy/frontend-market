@@ -1,6 +1,6 @@
-import { addToCart } from "@/entities/cart/api";
+import { useClientStore } from "@/features/auth/model/client-auth.store";
+import { useSellerStore } from "@/features/auth/model/seller-auth.store";
 import Button from "@/shared/ui/Button/Button";
-import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 
@@ -19,6 +19,8 @@ const CardProduct: FC<CardProductProps> = ({
   price,
   onClick,
 }) => {
+  const { isSellerAuth } = useSellerStore();
+  const { isClientAuth } = useClientStore();
   return (
     <div className="xl:w-[400px] lg:w-[380px] 850:w-[350px] md:w-[320px] sm:w-[260px] w-[300px] flex flex-col gap-4 h-[460px] ">
       <Link
@@ -37,7 +39,11 @@ const CardProduct: FC<CardProductProps> = ({
         <div className="text-2xl">{title}</div>
         <div className="font-semibold text-lg">{price} RUB</div>
         <div className="mt-4">
-          <Button onClick={onClick}>Добавить в корзину</Button>
+          <Button
+            disabled={!isClientAuth || isSellerAuth}
+            onClick={onClick}>
+            Добавить в корзину
+          </Button>
         </div>
       </div>
     </div>

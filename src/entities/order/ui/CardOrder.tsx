@@ -30,7 +30,7 @@ const CardOrder: FC<CardOrderProps> = ({
             className="flex flex-col sm:flex-row gap-4 items-center bg-white rounded-xl p-4 shadow-sm">
             <div className="w-[200px] h-[200px]">
               <img
-                className="rounded-xl"
+                className="rounded-xl w-[200px] aspect-square"
                 width={200}
                 height={200}
                 src={orderProduct.product.img}
