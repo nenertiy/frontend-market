@@ -1,6 +1,8 @@
 "use client";
 
+import { addToCart } from "@/entities/cart/api";
 import { fetchProduct } from "@/entities/product/api";
+import { useClientStore } from "@/features/auth/model/client-auth.store";
 import Button from "@/shared/ui/Button/Button";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
@@ -10,6 +12,17 @@ import React from "react";
 const ProductPage = () => {
   const params = useParams();
   const id = params?.id as string;
+
+  const { userId } = useClientStore();
+
+  const handleAddToCart = async (productId: string) => {
+    try {
+      await addToCart(userId, productId);
+      alert("Success");
+    } catch {
+      alert("Error");
+    }
+  };
 
   const { data: product, isSuccess } = useQuery({
     queryKey: ["productsByCategory", id],
@@ -36,7 +49,9 @@ const ProductPage = () => {
             <h2 className="text-2xl font-semibold">{product?.name}</h2>
             <div>{product?.description}</div>
           </div>
-          <Button>Добавить в корзину</Button>
+          <Button onClick={() => handleAddToCart(product?.id || "")}>
+            Добавить в корзину
+          </Button>
         </div>
       </div>
       <div>

@@ -24,7 +24,7 @@ const CardProduct: FC<CardProductProps> = ({
       <Link
         href={`/products/${id}`}
         className="bg-[rgb(248,249,254)] xl:w-[400px] lg:w-[380px] 850:w-[350px] md:w-[320px] sm:w-[260px] w-[300px] rounded-3xl aspect-square flex justify-center items-center gap-1">
-        <Image
+        <img
           className="rounded-xl aspect-square xl:w-[360px] lg:w-[340px] 850:w-[310px] md:w-[280px] sm:w-[220px] w-[260px]"
           src={img}
           alt={img}

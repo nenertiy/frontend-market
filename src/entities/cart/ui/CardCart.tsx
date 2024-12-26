@@ -25,13 +25,13 @@ const CardCart: FC<CardCartProps> = ({
   return (
     <div className="bg-[rgb(248,249,254)] rounded-3xl p-5 flex flex-col sm:flex-row gap-4 items-center shadow-md">
       <div className="w-[260px] h-[260px]">
-        <Image
+        <img
           className="rounded-xl"
           width={250}
           height={250}
           src={img}
           // src={
-          //   "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-14-pro-spaceblack-202404?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1712956909430"
+          // "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-14-pro-spaceblack-202404?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1712956909430"
           // }
           alt={name}
         />
