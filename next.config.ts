@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
 
 module.exports = {
   images: {
-    domains: ["store.storeimages.cdn-apple.com", "example.com"], // Добавьте нужный домен
+    domains: ["**", "example.com", "drive.google.com"],
   },
 };
 
