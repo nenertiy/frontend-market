@@ -17,7 +17,6 @@ const MenuPage = () => {
   const { data: products, isSuccess } = useQuery({
     queryKey: ["products", searchValue],
     queryFn: () => fetchProducts(searchValue),
-    // enabled: searchValue === "",
   });
 
   return (
