@@ -29,10 +29,10 @@ const CardCart: FC<CardCartProps> = ({
           className="rounded-xl"
           width={250}
           height={250}
-          // src={img}
-          src={
-            "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-14-pro-spaceblack-202404?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1712956909430"
-          }
+          src={img}
+          // src={
+          //   "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-14-pro-spaceblack-202404?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1712956909430"
+          // }
           alt={name}
         />
       </div>
