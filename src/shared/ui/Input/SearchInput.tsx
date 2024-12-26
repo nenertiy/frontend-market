@@ -9,7 +9,7 @@ interface SearchInputProps {
 const SearchInput: FC<SearchInputProps> = ({
   value,
   handleChange,
-  placeholder = "Search",
+  placeholder = "Поиск",
 }) => {
   return (
     <input
