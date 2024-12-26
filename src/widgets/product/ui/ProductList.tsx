@@ -1,5 +1,7 @@
+import { addToCart } from "@/entities/cart/api";
 import { Product } from "@/entities/product/types";
 import CardProduct from "@/entities/product/ui/CardProduct";
+import { useClientStore } from "@/features/auth/model/client-auth.store";
 import React, { FC } from "react";
 
 interface ProductListProps {
@@ -7,6 +9,16 @@ interface ProductListProps {
 }
 
 const ProductList: FC<ProductListProps> = ({ products }) => {
+  const handleAddToCart = async (clientId: string, productId: string) => {
+    try {
+      await addToCart(clientId, productId);
+      alert("Success");
+    } catch {
+      alert("Error");
+    }
+  };
+  const { userId } = useClientStore();
+
   return (
     <div className="flex flex-wrap gap-4 xl:gap-x-0 items-center justify-center md:justify-between md:gap-3 850:gap-y-16 lg:gap-y-20 xl:gap-y-[100px]">
       {products.map((product) => (
@@ -16,6 +28,7 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
           title={product.name}
           key={product.id}
           id={product.id}
+          onClick={() => handleAddToCart(userId, product.id)}
         />
       ))}
     </div>
