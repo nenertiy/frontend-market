@@ -6,7 +6,6 @@ import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useSellerStore } from "@/features/auth/model/seller-auth.store";
 import Button from "@/shared/ui/Button/Button";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import React from "react";
 
@@ -36,17 +35,14 @@ const ProductPage = () => {
       <div className="flex flex-col md:flex-row justify-center gap-10 xl:gap-[120px] items-center">
         <div className="flex justify-center items-center">
           <img
-            // className="w-[500px] "
+            className="rounded-2xl "
             src={product?.img}
-            // src={
-            //   "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-14-pro-spaceblack-202404?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1712956909430"
-            // }
             alt={product?.name || ""}
             width={500}
             height={500}
           />
         </div>
-        <div className="flex flex-col justify-evenly md:gap-4 gap-6">
+        <div className="flex flex-col justify-evenly md:gap-4 gap-6 w-[40%]">
           <div className="flex flex-col md:gap-4 gap-6 ">
             <h2 className="text-2xl font-semibold">{product?.name}</h2>
             <div>{product?.description}</div>
