@@ -3,10 +3,10 @@
 import React from "react";
 import Modal from "@/shared/ui/Modal/Modal";
 import Button from "@/shared/ui/Button/Button";
-import { makeProduct } from "@/entities/product/api";
 import { fetchCategories } from "@/entities/category/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { makeProduct } from "../api";
 
 interface CreateProductModalProps {
   isOpen: boolean;
