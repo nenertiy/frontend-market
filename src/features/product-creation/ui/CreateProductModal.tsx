@@ -7,6 +7,7 @@ import { fetchCategories } from "@/entities/category/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { makeProduct } from "../api";
+import { toast } from "react-toastify";
 
 interface CreateProductModalProps {
   isOpen: boolean;
@@ -85,11 +86,10 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
         sellerId,
         [data.productCategoryId]
       );
-      alert("Товар успешно создан!");
+      toast.success("Товар успешно создан!");
       queryClient.invalidateQueries({
         queryKey: ["products", "sellerDashboard"],
       });
-
       onClose();
     } catch (error) {
       console.error("Ошибка при создании товара:", error);

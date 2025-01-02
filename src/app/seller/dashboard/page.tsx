@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getSellerDashboard } from "@/entities/seller/api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteProduct, getSellerDashboard } from "@/entities/seller/api";
 import SellerCardProduct from "@/entities/seller/ui/SellerCardProduct";
 import Button from "@/shared/ui/Button/Button";
 import CreateProductModal from "@/features/product-creation/ui/CreateProductModal";
+import { toast } from "react-toastify";
 
 const DashboardPage = () => {
   const { data: dashboard, isSuccess } = useQuery({
@@ -13,23 +14,34 @@ const DashboardPage = () => {
     queryFn: getSellerDashboard,
   });
 
+  const queryClient = useQueryClient();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const handleDeleteProduct = async (id: string) => {
+    try {
+      await deleteProduct(id);
+      toast.success("Продукт удален");
+      queryClient.invalidateQueries({
+        queryKey: ["products", "sellerDashboard"],
+      });
+    } catch {
+      toast.error("Не удалось удалить продукт. Попробуйте позже.");
+    }
+  };
 
   return (
     <div className="p-6">
       <div className="mb-6 flex justify-between items-center">
         <h1 className="text-3xl font-semibold">Ваши товары</h1>
         <Button
-          onClick={openModal}
+          onClick={() => setIsModalOpen(true)}
           color="green">
           Добавить товар
         </Button>
       </div>
 
-      <div className="flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 lg:gap-y-[120px] lg:justify-between">
         {isSuccess &&
           dashboard?.products?.map((product: any) => (
             <SellerCardProduct
@@ -41,14 +53,14 @@ const DashboardPage = () => {
               onChange={() =>
                 console.log(`Редактирование продукта: ${product.id}`)
               }
-              onDelete={() => console.log(`Удаление продукта: ${product.id}`)}
+              onDelete={() => handleDeleteProduct(product.id)}
             />
           ))}
       </div>
 
       <CreateProductModal
         isOpen={isModalOpen}
-        onClose={closeModal}
+        onClose={() => setIsModalOpen(false)}
         sellerId={dashboard?.id || ""}
       />
     </div>
