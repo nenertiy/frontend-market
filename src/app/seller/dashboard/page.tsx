@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getSellerDashboard } from "@/entities/seller/api";
 import SellerCardProduct from "@/entities/seller/ui/SellerCardProduct";
 import Button from "@/shared/ui/Button/Button";
-import CreateProductModal from "@/widgets/product/ui/CreateProductModal";
+import CreateProductModal from "@/features/product-creation/ui/CreateProductModal";
 
 const DashboardPage = () => {
   const { data: dashboard, isSuccess } = useQuery({
