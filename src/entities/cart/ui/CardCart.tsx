@@ -40,7 +40,8 @@ const CardCart: FC<CardCartProps> = ({
           Цена за единицу: <span className="font-medium">{price} RUB</span>
         </div>
         <div className="text-md text-gray-600">
-          Сумма: <span className="font-medium">{price * count} RUB</span>
+          Сумма:{" "}
+          <span className="font-medium">{(price * count).toFixed(2)} RUB</span>
         </div>
       </div>
 

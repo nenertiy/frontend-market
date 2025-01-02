@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { authModel } from "../model/auth.model";
 import Form, { Field as FieldForm } from "@/shared/ui/Form/Form";
+import { toast } from "react-toastify";
 
 const ClientSignUpForm = () => {
   const fields: FieldForm[] = [
@@ -19,8 +20,10 @@ const ClientSignUpForm = () => {
   const handleSubmit = async (data: { email: string; password: string }) => {
     const { success } = await authModel.registrationClient(data);
     if (success) {
-      alert(success);
+      toast.success("Успешно зарегистрирован");
       redirect(HOME);
+    } else {
+      toast.error("Ошибка регистрации");
     }
   };
   return (

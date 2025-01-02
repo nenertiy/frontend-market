@@ -6,6 +6,7 @@ import Form, { Field as FieldForm } from "@/shared/ui/Form/Form";
 import { redirect } from "next/navigation";
 import React from "react";
 import { authModel } from "../model/auth.model";
+import { toast } from "react-toastify";
 
 const SellerSignInForm = () => {
   const fields: FieldForm[] = [
@@ -16,8 +17,10 @@ const SellerSignInForm = () => {
   const handleSubmit = async (data: { email: string; password: string }) => {
     const { success } = await authModel.loginSeller(data);
     if (success) {
-      alert(success);
+      toast.success("Авторизирован");
       redirect(HOME);
+    } else {
+      toast.error("Ошибка авторизации");
     }
   };
   return (

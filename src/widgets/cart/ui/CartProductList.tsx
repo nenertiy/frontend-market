@@ -7,6 +7,7 @@ import Button from "@/shared/ui/Button/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 import React, { FC } from "react";
+import { toast } from "react-toastify";
 
 interface CartProductListProps {
   cart: Cart;
@@ -28,22 +29,26 @@ const CartProductList: FC<CartProductListProps> = ({ cart, userId }) => {
   const onIncrease = async (productId: string) => {
     await addToCart(userId, productId);
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    toast.success("Добавлен в корзину");
   };
 
   const onDecrease = async (productId: string) => {
     await decreaseCart(userId, productId);
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    toast.success("Удален из корзины");
   };
 
   const onRemove = async (productId: string) => {
     await removeFromCart(userId, productId);
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    toast.success("Товар удален");
   };
 
   const postOrder = async () => {
     await makeOrder(userId);
     queryClient.invalidateQueries({ queryKey: ["order", userId] });
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    toast.success("Заказ успешно создан");
     redirect(ORDER);
   };
 

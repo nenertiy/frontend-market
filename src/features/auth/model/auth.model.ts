@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { apiAuth } from "../api";
 import { useClientStore } from "./client-auth.store";
 import { useSellerStore } from "./seller-auth.store";
@@ -62,6 +63,7 @@ export const authModel = {
 
   async logout() {
     removeToken(true);
+    toast.success("Выход успешно выполнен");
     useClientStore.getState().logout();
     useSellerStore.getState().logout();
   },

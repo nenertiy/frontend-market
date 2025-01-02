@@ -14,7 +14,6 @@ import {
   DASHBOARD,
   HOME,
   ORDER,
-  PROFILE,
   SELLER_SIGN_IN,
 } from "@/shared/router/router";
 import Icon from "@/shared/ui/Icon/Icon";

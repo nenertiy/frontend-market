@@ -3,6 +3,7 @@ import "../shared/styles/globals.css";
 import "../shared/styles/reset.css";
 import Header from "@/widgets/header/ui/header";
 import Providers from "@/shared/utils/providers";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +23,12 @@ export default function RootLayout({
           {/* <div className="sm:pb-[100px] lg:pb-[120px]"> */}
           {children}
           {/* </div> */}
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={true}
+            newestOnTop={false}
+          />
         </Providers>
       </body>
     </html>

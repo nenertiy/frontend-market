@@ -3,6 +3,7 @@ import { Product } from "@/entities/product/types";
 import CardProduct from "@/entities/product/ui/CardProduct";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import React, { FC } from "react";
+import { toast } from "react-toastify";
 
 interface ProductListProps {
   products: Product[];
@@ -13,6 +14,7 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
     try {
       await addToCart(clientId, productId);
       // alert("Success");
+      toast.success("Товар добавлен в корзину");
     } catch {
       // alert("Error");
     }
