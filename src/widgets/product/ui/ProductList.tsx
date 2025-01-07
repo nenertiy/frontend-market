@@ -10,9 +10,9 @@ interface ProductListProps {
 }
 
 const ProductList: FC<ProductListProps> = ({ products }) => {
-  const handleAddToCart = async (clientId: string, productId: string) => {
+  const handleAddToCart = async (productId: string) => {
     try {
-      await addToCart(clientId, productId);
+      await addToCart(productId);
       // alert("Success");
       toast.success("Товар добавлен в корзину");
     } catch {
@@ -31,7 +31,7 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
           title={product.name}
           key={product.id}
           id={product.id}
-          onClick={() => handleAddToCart(userId, product.id)}
+          onClick={() => handleAddToCart(product.id)}
         />
       ))}
     </div>

@@ -1,11 +1,11 @@
 import { apiClient } from "@/shared/api";
 
-export const getOrder = async (clientId: string) => {
-  const response = await apiClient.get(`/order/${clientId}`);
+export const getOrder = async () => {
+  const response = await apiClient.get(`/order`);
   return response.data;
 };
 
-export const makeOrder = async (clientId: string) => {
-  const response = await apiClient.post(`/order/${clientId}`);
+export const makeOrder = async () => {
+  const response = await apiClient.post(`/order`);
   return response.data;
 };
