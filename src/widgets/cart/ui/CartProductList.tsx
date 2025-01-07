@@ -27,25 +27,25 @@ const CartProductList: FC<CartProductListProps> = ({ cart, userId }) => {
   );
 
   const onIncrease = async (productId: string) => {
-    await addToCart(userId, productId);
+    await addToCart(productId);
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
     toast.success("Добавлен в корзину");
   };
 
   const onDecrease = async (productId: string) => {
-    await decreaseCart(userId, productId);
+    await decreaseCart(productId);
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
     toast.success("Удален из корзины");
   };
 
   const onRemove = async (productId: string) => {
-    await removeFromCart(userId, productId);
+    await removeFromCart(productId);
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
     toast.success("Товар удален");
   };
 
   const postOrder = async () => {
-    await makeOrder(userId);
+    await makeOrder();
     queryClient.invalidateQueries({ queryKey: ["order", userId] });
     queryClient.invalidateQueries({ queryKey: ["cart", userId] });
     toast.success("Заказ успешно создан");
