@@ -4,25 +4,25 @@ import { addToCart } from "@/entities/cart/api";
 import { fetchProduct } from "@/entities/product/api";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useSellerStore } from "@/features/auth/model/seller-auth.store";
+import { CLIENT_SIGN_IN } from "@/shared/router/router";
 import Button from "@/shared/ui/Button/Button";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const params = useParams();
   const id = params?.id as string;
 
-  const { userId, isClientAuth } = useClientStore();
+  const { isClientAuth } = useClientStore();
   const { isSellerAuth } = useSellerStore();
 
   const handleAddToCart = async (productId: string) => {
     try {
-      await addToCart(userId, productId);
-      // alert("Success");
-    } catch {
-      // alert("Error");
-    }
+      await addToCart(productId);
+      toast.success("Товар добавлен в корзину");
+    } catch {}
   };
 
   const { data: product } = useQuery({
@@ -37,7 +37,7 @@ const ProductPage = () => {
           <img
             className="rounded-2xl "
             src={product?.img}
-            alt={product?.name || ""}
+            alt={product?.name}
             width={500}
             height={500}
           />
@@ -47,20 +47,26 @@ const ProductPage = () => {
             <h2 className="text-2xl font-semibold">{product?.name}</h2>
             <div>{product?.description}</div>
           </div>
-          <Button
-            disabled={!isClientAuth || isSellerAuth}
-            onClick={() => handleAddToCart(product?.id || "")}>
-            Добавить в корзину
-          </Button>
+          {isSellerAuth ? (
+            ""
+          ) : isClientAuth ? (
+            <Button onClick={() => handleAddToCart(product?.id || "")}>
+              Добавить в корзину
+            </Button>
+          ) : (
+            <Button onClick={() => redirect(CLIENT_SIGN_IN)}>
+              Войдите в аккаунт
+            </Button>
+          )}
         </div>
       </div>
       <div>
-        <div className="text-2xl">Отзывы</div>
+        {/* <div className="text-2xl">Отзывы</div>
         <div>
           {product?.review.map((rating) => (
             <div>{rating.rating}</div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

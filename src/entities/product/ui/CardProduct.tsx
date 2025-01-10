@@ -1,7 +1,9 @@
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useSellerStore } from "@/features/auth/model/seller-auth.store";
+import { CLIENT_SIGN_IN } from "@/shared/router/router";
 import Button from "@/shared/ui/Button/Button";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React, { FC } from "react";
 
 interface CardProductProps {
@@ -32,18 +34,21 @@ const CardProduct: FC<CardProductProps> = ({
           alt={img}
           width={240}
           height={240}
-          // fill
         />
       </Link>
       <div className="xl:max-w-[400px] lg:max-w-[380px] 850:max-w-[350px] md:max-w-[320] sm:max-w-[260px] max-w-[300px] box-border text-wrap tracking-wide flex flex-col justify-center">
         <div className="text-2xl">{title}</div>
         <div className="font-semibold text-lg">{price} RUB</div>
         <div className="mt-4">
-          <Button
-            disabled={!isClientAuth || isSellerAuth}
-            onClick={onClick}>
-            Добавить в корзину
-          </Button>
+          {isSellerAuth ? (
+            ""
+          ) : isClientAuth ? (
+            <Button onClick={onClick}>Добавить в корзину</Button>
+          ) : (
+            <Button onClick={() => redirect(CLIENT_SIGN_IN)}>
+              Войдите в аккаунт
+            </Button>
+          )}
         </div>
       </div>
     </div>
