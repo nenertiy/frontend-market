@@ -1,6 +1,6 @@
 "use client";
 
-import { HOME } from "@/shared/router/router";
+import { DASHBOARD } from "@/shared/router/router";
 import Button from "@/shared/ui/Button/Button";
 import Form, { Field as FieldForm } from "@/shared/ui/Form/Form";
 import { redirect } from "next/navigation";
@@ -18,7 +18,7 @@ const SellerSignInForm = () => {
     const { success } = await authModel.loginSeller(data);
     if (success) {
       toast.success("Авторизирован");
-      redirect(HOME);
+      redirect(DASHBOARD);
     } else {
       toast.error("Ошибка авторизации");
     }
