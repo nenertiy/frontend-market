@@ -9,5 +9,5 @@ export const LINKS = [
     name: "Категории",
     link: CATEGORIES,
   },
-  //   { name: "Вход", link: CLIENT_SIGN_IN },
+  // { name: "Вход", link: CLIENT_SIGN_IN },
 ];
