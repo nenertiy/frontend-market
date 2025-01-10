@@ -5,15 +5,13 @@ export const makeProduct = async (
   description: string,
   price: number,
   img: string,
-  // sellerId: string,
-  productCategoryId: string[]
+  productCategoryId: string
 ) => {
   const response = await apiClient.post("/products", {
     name,
     description,
     price,
     img,
-    // sellerId,
     productCategoryId,
   });
   return response.data;

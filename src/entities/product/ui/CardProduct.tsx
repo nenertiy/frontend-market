@@ -37,7 +37,7 @@ const CardProduct: FC<CardProductProps> = ({
         />
       </Link>
       <div className="xl:max-w-[400px] lg:max-w-[380px] 850:max-w-[350px] md:max-w-[320] sm:max-w-[260px] max-w-[300px] box-border text-wrap tracking-wide flex flex-col justify-center">
-        <div className="text-2xl">{title}</div>
+        <div className="text-2xl h-16 line-clamp-2">{title}</div>
         <div className="font-semibold text-lg">{price} RUB</div>
         <div className="mt-4">
           {isSellerAuth ? (

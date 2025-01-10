@@ -82,9 +82,6 @@ const Header = () => {
                   : isSellerAuth
                   ? DASHBOARD
                   : ""
-                // isClientAuth
-                // ? PROFILE
-                // : ""
               }
               img={user}
               desc="user"
