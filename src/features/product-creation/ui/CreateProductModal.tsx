@@ -42,7 +42,7 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
         data.description,
         Number(data.price),
         data.img,
-        [data.productCategoryId]
+        data.productCategoryId
       );
       toast.success("Товар успешно создан!");
       if (onSuccess) onSuccess();

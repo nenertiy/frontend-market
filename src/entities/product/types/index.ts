@@ -1,3 +1,5 @@
+import { Review } from "@/entities/review/types";
+
 export interface Product {
   id: string;
   name: string;
@@ -10,12 +12,4 @@ export interface Product {
   createdAt: string;
   sellerId: string;
   review: Review[];
-}
-
-export interface Review {
-  id: string;
-  description?: string;
-  rating: number;
-  clientId: string;
-  createdAt: string;
 }
