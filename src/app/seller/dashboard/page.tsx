@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteProduct, getSellerDashboard } from "@/entities/seller/api";
-import SellerCardProduct from "@/entities/seller/ui/SellerCardProduct";
 import Button from "@/shared/ui/Button/Button";
 import CreateProductModal from "@/features/product-creation/ui/CreateProductModal";
 import { toast } from "react-toastify";
+import SellerDashboard from "@/widgets/seller/ui/SellerDashboard";
 
 const DashboardPage = () => {
   const { data: dashboard, isSuccess } = useQuery({
@@ -23,11 +23,23 @@ const DashboardPage = () => {
       await deleteProduct(id);
       toast.success("Продукт удален");
       queryClient.invalidateQueries({
-        queryKey: ["products", "sellerDashboard"],
+        queryKey: ["sellerDashboard"],
       });
-    } catch {
+    } catch (error) {
+      console.error(error);
       toast.error("Не удалось удалить продукт. Попробуйте позже.");
     }
+  };
+
+  const handleAddProduct = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["sellerDashboard"],
+    });
+    setIsModalOpen(false);
+  };
+
+  const handleChangeProduct = (id: string) => {
+    console.log(`Редактирование продукта с ID: ${id}`);
   };
 
   return (
@@ -42,27 +54,22 @@ const DashboardPage = () => {
       </div>
 
       <div className="flex flex-wrap gap-6 lg:gap-y-[120px] lg:justify-between">
-        {isSuccess &&
-          dashboard?.products?.map((product: any) => (
-            <SellerCardProduct
-              key={product.id}
-              img={product.img}
-              id={product.id}
-              title={product.name}
-              price={product.price}
-              onChange={() =>
-                console.log(`Редактирование продукта: ${product.id}`)
-              }
-              onDelete={() => handleDeleteProduct(product.id)}
-            />
-          ))}
+        {isSuccess && (
+          <SellerDashboard
+            dashboard={dashboard}
+            onDelete={handleDeleteProduct}
+            onChange={handleChangeProduct}
+          />
+        )}
       </div>
 
-      <CreateProductModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        sellerId={dashboard?.id || ""}
-      />
+      {isModalOpen && (
+        <CreateProductModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={handleAddProduct}
+        />
+      )}
     </div>
   );
 };

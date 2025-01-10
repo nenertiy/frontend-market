@@ -14,7 +14,6 @@ interface SellerCardProductProps {
 
 const SellerCardProduct: FC<SellerCardProductProps> = ({
   img,
-  id,
   title,
   price,
   onDelete,

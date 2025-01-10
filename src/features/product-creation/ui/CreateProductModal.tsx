@@ -4,7 +4,7 @@ import React from "react";
 import Modal from "@/shared/ui/Modal/Modal";
 import Button from "@/shared/ui/Button/Button";
 import { fetchCategories } from "@/entities/category/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { makeProduct } from "../api";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 interface CreateProductModalProps {
   isOpen: boolean;
   onClose: () => void;
-  sellerId: string;
+  onSuccess?: () => void;
 }
 
 interface FormData {
@@ -23,58 +23,17 @@ interface FormData {
   productCategoryId: string;
 }
 
-interface Field {
-  name: keyof FormData;
-  label: string;
-  placeholder: string;
-  type: string;
-  required: boolean;
-}
-
 const CreateProductModal: React.FC<CreateProductModalProps> = ({
   isOpen,
   onClose,
-  sellerId,
+  onSuccess,
 }) => {
-  const queryClient = useQueryClient();
-
   const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: () => fetchCategories(),
   });
 
-  const { register, handleSubmit } = useForm<FormData>();
-
-  const fields: Field[] = [
-    {
-      name: "name",
-      label: "Название",
-      placeholder: "Введите название товара",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "description",
-      label: "Описание",
-      placeholder: "Введите описание товара",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "price",
-      label: "Цена",
-      placeholder: "Введите цену товара",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "img",
-      label: "Ссылка на изображение",
-      placeholder: "Введите URL изображения",
-      type: "text",
-      required: true,
-    },
-  ];
+  const { register, handleSubmit, reset } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
@@ -83,17 +42,15 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
         data.description,
         Number(data.price),
         data.img,
-        sellerId,
         [data.productCategoryId]
       );
       toast.success("Товар успешно создан!");
-      queryClient.invalidateQueries({
-        queryKey: ["products", "sellerDashboard"],
-      });
+      if (onSuccess) onSuccess();
+      reset();
       onClose();
     } catch (error) {
-      console.error("Ошибка при создании товара:", error);
-      alert("Не удалось создать товар.");
+      console.error(error);
+      toast.error("Ошибка при создании товара!");
     }
   };
 
@@ -105,25 +62,60 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4">
-        {fields.map((field) => (
-          <div
-            key={field.name}
-            className="flex flex-col gap-2">
-            <label
-              htmlFor={field.name}
-              className="text-sm font-medium">
-              {field.label}
-            </label>
-            <input
-              {...register(field.name as keyof FormData, {
-                required: field.required,
-              })}
-              type={field.type}
-              placeholder={field.placeholder}
-              className="p-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-        ))}
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="name"
+            className="text-sm font-medium">
+            Название
+          </label>
+          <input
+            {...register("name", { required: true })}
+            type="text"
+            placeholder="Введите название товара"
+            className="p-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="description"
+            className="text-sm font-medium">
+            Описание
+          </label>
+          <input
+            {...register("description", { required: true })}
+            placeholder="Введите описание товара"
+            className="p-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="price"
+            className="text-sm font-medium">
+            Цена
+          </label>
+          <input
+            {...register("price", { required: true, valueAsNumber: true })}
+            type="number"
+            placeholder="Введите цену товара"
+            className="p-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="img"
+            className="text-sm font-medium">
+            Ссылка на изображение
+          </label>
+          <input
+            {...register("img", { required: true })}
+            type="text"
+            placeholder="Введите URL изображения"
+            className="p-2 border border-gray-300 rounded-lg"
+          />
+        </div>
 
         <div className="flex flex-col gap-2">
           <label
@@ -150,7 +142,11 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
           </select>
         </div>
 
-        <Button color="green">Создать</Button>
+        <Button
+          type="submit"
+          color="green">
+          Создать
+        </Button>
       </form>
     </Modal>
   );
