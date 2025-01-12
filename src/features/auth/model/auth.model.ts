@@ -37,6 +37,7 @@ export const authModel = {
     try {
       const response = await apiAuth.loginSeller(data);
       setToken(response.data.accessToken, response.data.refreshToken);
+      useClientStore.getState().logout();
       useSellerStore.getState().login();
       return { success: true };
     } catch {
@@ -51,6 +52,7 @@ export const authModel = {
     try {
       const response = await apiAuth.registrationSeller(data);
       setToken(response.data.accessToken, response.data.refreshToken);
+      useClientStore.getState().logout();
       useSellerStore.getState().login();
       return { success: true };
     } catch {
