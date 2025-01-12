@@ -48,51 +48,67 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10 mx-auto">
-      <div className="flex flex-col md:flex-row justify-center gap-10 xl:gap-[120px] items-center">
-        <div className="flex justify-center items-center">
+    <div className="flex flex-col gap-6 p-4">
+      <div className="flex flex-col lg:flex-row justify-center gap-6 items-center">
+        <div className="flex justify-center items-center w-full lg:w-1/2">
           <img
-            className="rounded-2xl"
+            className="rounded-2xl w-full max-w-[500px] xl:max-w-[600px] h-auto object-cover"
             src={product?.img}
             alt={product?.name}
-            width={500}
-            height={500}
           />
         </div>
-        <div className="flex flex-col justify-evenly md:gap-4 gap-6 w-[40%]">
-          <div className="flex flex-col md:gap-4 gap-6">
-            <h2 className="text-2xl font-semibold">{product?.name}</h2>
-            <div>{product?.description}</div>
-            <div className="font-semibold text-lg">{product?.price} RUB</div>
+
+        <div className="flex flex-col gap-4 w-full lg:w-1/2">
+          <h2 className="text-xl lg:text-2xl font-semibold">{product?.name}</h2>
+          <div className="text-sm lg:text-base text-gray-700">
+            {product?.description}
           </div>
+          <div className="font-bold text-lg lg:text-xl">
+            {product?.price} RUB
+          </div>
+
           {isSellerAuth ? (
-            ""
+            <></>
           ) : isClientAuth ? (
-            <Button onClick={() => handleAddToCart(product?.id || "")}>
+            <Button
+              className="w-full py-2"
+              onClick={() => handleAddToCart(product?.id || "")}>
               Добавить в корзину
             </Button>
           ) : (
-            <Button onClick={() => redirect(CLIENT_SIGN_IN)}>
+            <Button
+              className="w-full py-2"
+              onClick={() => redirect(CLIENT_SIGN_IN)}>
               Войдите в аккаунт
             </Button>
           )}
         </div>
       </div>
-      <div>
-        <div className="text-2xl mb-4">Отзывы</div>
+
+      <div className="mt-8">
+        <div className="text-xl mb-4">Отзывы</div>
         <div className="space-y-4">
-          {product?.review.map((review) => (
-            <ReviewCard
-              key={review.id}
-              description={review.description}
-              rating={review.rating}
-              name={review.client.name}
-              surname={review.client.surname}
-            />
-          ))}
+          {product?.review && product.review.length > 0 ? (
+            product?.review.map((review) => (
+              <ReviewCard
+                key={review.id}
+                description={review.description}
+                rating={review.rating}
+                name={review.client.name}
+                surname={review.client.surname}
+              />
+            ))
+          ) : (
+            <div className=" text-gray-500">Оставьте первый отзыв</div>
+          )}
         </div>
-        {isClientAuth && <ReviewForm onSubmit={handleAddReview} />}
       </div>
+
+      {isClientAuth && (
+        <div className="mt-8">
+          <ReviewForm onSubmit={handleAddReview} />
+        </div>
+      )}
     </div>
   );
 };
