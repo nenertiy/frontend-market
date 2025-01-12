@@ -17,7 +17,7 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 xl:gap-x-0 items-center justify-center md:justify-between md:gap-3 850:gap-y-16 lg:gap-y-20 xl:gap-y-[100px]">
+    <div className="flex flex-wrap gap-4 xl:gap-x-0 items-center justify-center md:justify-between md:gap-3 md:gap-y-20 850:gap-y-16 lg:gap-y-28 xl:gap-y-[140px]">
       {products.map((product) => (
         <CardProduct
           img={product.img}
