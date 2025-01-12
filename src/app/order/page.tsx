@@ -5,6 +5,7 @@ import OrderList from "@/widgets/order/ui/OrderList";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { ProtectedPage } from "@/features/auth/ui/protected-page";
 
 const OrderPage = () => {
   const { userId } = useClientStore();
@@ -15,7 +16,7 @@ const OrderPage = () => {
     isError,
   } = useQuery({
     queryKey: ["order", userId],
-    queryFn: () => getOrder(userId),
+    queryFn: getOrder,
     enabled: !!userId,
   });
 
@@ -43,4 +44,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default ProtectedPage(OrderPage, "client");

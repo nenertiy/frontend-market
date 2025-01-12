@@ -7,6 +7,7 @@ import Button from "@/shared/ui/Button/Button";
 import CreateProductModal from "@/features/product-creation/ui/CreateProductModal";
 import { toast } from "react-toastify";
 import SellerDashboard from "@/widgets/seller/ui/SellerDashboard";
+import { ProtectedPage } from "@/features/auth/ui/protected-page";
 
 const DashboardPage = () => {
   const { data: dashboard, isSuccess } = useQuery({
@@ -74,4 +75,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default ProtectedPage(DashboardPage, "seller");
