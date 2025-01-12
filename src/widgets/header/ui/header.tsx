@@ -25,6 +25,7 @@ import { authModel } from "@/features/auth/model/auth.model";
 const Header = () => {
   const { isClientAuth } = useClientStore();
   const { isSellerAuth } = useSellerStore();
+
   return (
     <div className="flex flex-col mt-2">
       <div className="flex justify-end gap-2">
@@ -62,18 +63,19 @@ const Header = () => {
           </div>
           <div className="flex gap-6">
             {isClientAuth && (
-              <Icon
-                link={ORDER}
-                img={order}
-                desc="order"
-              />
-            )}
-            {isClientAuth && (
-              <Icon
-                link={CART}
-                img={cart}
-                desc="cart"
-              />
+              <>
+                <Icon
+                  link={ORDER}
+                  img={order}
+                  desc="order"
+                />
+
+                <Icon
+                  link={CART}
+                  img={cart}
+                  desc="cart"
+                />
+              </>
             )}
             <Icon
               link={
@@ -89,7 +91,6 @@ const Header = () => {
             {(isClientAuth || isSellerAuth) && (
               <Button onClick={() => authModel.logout()}>Выход</Button>
             )}
-            {/* При многоразовом нажатии на иконку при селлере он дублирует адрес */}
           </div>
         </div>
       </div>
