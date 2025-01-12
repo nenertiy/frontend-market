@@ -27,15 +27,15 @@ const ReviewForm: FC<ReviewFormProps> = ({ onSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="flex flex-col gap-4 mt-8">
-      <h3 className="text-xl font-semibold mb-4">Оставить отзыв</h3>
+      className="flex flex-col gap-4 mt-6 p-4 border rounded-xl bg-white shadow-md">
+      <h3 className="text-lg font-semibold text-gray-800">Оставить отзыв</h3>
       <textarea
-        className="px-3 py-2 border rounded-lg bg-[rgb(250,250,254)]"
+        className="w-full h-24 px-3 py-2 bg-[rgb(250,250,254)] border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-[rgb(194,243,119)]"
         placeholder="Напишите свой отзыв"
         {...register("description", { required: "Поле обязательно" })}
       />
       <input
-        className="p-2 border rounded w-20"
+        className="w-20 px-2 py-1 border rounded-md text-center focus:outline-none focus:ring-2 focus:ring-[rgb(194,243,119)] bg-[rgb(250,250,254)]"
         type="number"
         min={1}
         max={5}
@@ -46,7 +46,7 @@ const ReviewForm: FC<ReviewFormProps> = ({ onSubmit }) => {
           max: { value: 5, message: "Максимальный рейтинг: 5" },
         })}
       />
-      <Button type="submit">Оставить отзыв</Button>
+      <Button>Оставить отзыв</Button>
     </form>
   );
 };
