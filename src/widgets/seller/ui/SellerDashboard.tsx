@@ -18,7 +18,7 @@ const SellerDashboard: FC<SellerDashboardProps> = ({
   onDelete,
 }) => {
   return (
-    <div className="flex flex-wrap sm:flex-nowrap flex-row gap-[140px] xl:gap-x-20 items-center justify-center md:justify-between md:gap-3 850:gap-y-16 lg:gap-y-20 xl:gap-y-[100px]">
+    <div className="flex flex-wrap flex-row gap-y-[100px] items-center justify-center 850:justify-between md:gap-y-[140px] 850:gap-y-[140px]">
       {dashboard?.products?.map((product) => (
         <SellerCardProduct
           key={product.id}
