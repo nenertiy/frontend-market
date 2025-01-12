@@ -5,6 +5,7 @@ import CartProductList from "@/widgets/cart/ui/CartProductList";
 import { useClientStore } from "@/features/auth/model/client-auth.store";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { ProtectedPage } from "@/features/auth/ui/protected-page";
 
 const CartPage = () => {
   const { userId } = useClientStore();
@@ -15,7 +16,7 @@ const CartPage = () => {
     isError,
   } = useQuery({
     queryKey: ["cart", userId],
-    queryFn: () => getCart(userId),
+    queryFn: getCart,
     enabled: !!userId,
   });
 
@@ -46,4 +47,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default ProtectedPage(CartPage, "client");
