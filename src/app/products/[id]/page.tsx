@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { redirect, useParams } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
+import ReactStars from "react-stars";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -60,6 +61,21 @@ const ProductPage = () => {
 
         <div className="flex flex-col gap-4 w-full lg:w-1/2">
           <h2 className="text-xl lg:text-2xl font-semibold">{product?.name}</h2>
+          {product?.rating !== undefined && product.rating > 0 && (
+            <div className="flex items-center gap-4">
+              <ReactStars
+                count={5}
+                size={24}
+                edit={false}
+                color2={"#ffd700"}
+                value={product.rating}
+              />
+              <h1 className="text-lg font-semibold">
+                {product.rating.toFixed(2)}
+              </h1>
+            </div>
+          )}
+
           <div className="text-sm lg:text-base text-gray-700">
             {product?.description}
           </div>

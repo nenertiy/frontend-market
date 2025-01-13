@@ -11,5 +11,6 @@ export interface Product {
   isDeleted: boolean;
   createdAt: string;
   sellerId: string;
+  rating: number;
   review: Review[];
 }
