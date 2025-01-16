@@ -1,3 +1,5 @@
+import { Product } from "@/entities/product/types";
+
 export interface Seller {
   id: string;
   shopName: string;
@@ -8,4 +10,6 @@ export interface Seller {
   phone: string;
   INN: string;
   logo?: string;
+  rating: number;
+  products: Product[];
 }

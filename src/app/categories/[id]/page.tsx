@@ -1,7 +1,6 @@
 "use client";
 
 import { fetchCategory } from "@/entities/category/api";
-import CardProduct from "@/entities/product/ui/CardProduct";
 import ProductList from "@/widgets/product/ui/ProductList";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";

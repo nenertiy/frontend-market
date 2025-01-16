@@ -1,11 +1,12 @@
 import { apiClient } from "@/shared/api";
+import { Seller } from "../types";
 
 export const getSellerDashboard = async () => {
   const response = await apiClient.get("/sellers/profile");
   return response.data;
 };
 
-export const getSellerProfile = async (sellerId: string) => {
+export const getSellerProfile = async (sellerId: string): Promise<Seller> => {
   const response = await apiClient.get(`/sellers/${sellerId}`);
   return response.data;
 };
