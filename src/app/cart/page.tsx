@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { ProtectedPage } from "@/features/auth/ui/protected-page";
 
-const CartPage = () => {
+const CartPageContent = () => {
   const { userId } = useClientStore();
 
   const {
@@ -47,11 +47,10 @@ const CartPage = () => {
   );
 };
 
-// Используем ProtectedPage как обертку
-const CartPageWithProtection = () => (
+const CartPage = () => (
   <ProtectedPage user="client">
-    <CartPage />
+    <CartPageContent />
   </ProtectedPage>
 );
 
-export default CartPageWithProtection;
+export default CartPage;

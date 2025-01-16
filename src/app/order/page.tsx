@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { ProtectedPage } from "@/features/auth/ui/protected-page";
 
-const OrderPage = () => {
+const OrderPageContent = () => {
   const { userId } = useClientStore();
 
   const {
@@ -44,10 +44,10 @@ const OrderPage = () => {
   );
 };
 
-const OrderPageWithProtection = () => {
+const OrderPage = () => (
   <ProtectedPage user="client">
-    <OrderPage />
-  </ProtectedPage>;
-};
+    <OrderPageContent />
+  </ProtectedPage>
+);
 
-export default OrderPageWithProtection;
+export default OrderPage;

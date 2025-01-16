@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import SellerDashboard from "@/widgets/seller/ui/SellerDashboard";
 import { ProtectedPage } from "@/features/auth/ui/protected-page";
 
-const DashboardPage = () => {
+const DashboardPageContent = () => {
   const { data: dashboard, isSuccess } = useQuery({
     queryKey: ["sellerDashboard"],
     queryFn: getSellerDashboard,
@@ -75,10 +75,10 @@ const DashboardPage = () => {
   );
 };
 
-const DashboardPageWithProtection = () => {
+const DashboardPage = () => (
   <ProtectedPage user="seller">
-    <DashboardPage />
-  </ProtectedPage>;
-};
+    <DashboardPageContent />
+  </ProtectedPage>
+);
 
-export default DashboardPageWithProtection;
+export default DashboardPage;
