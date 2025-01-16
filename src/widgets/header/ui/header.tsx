@@ -12,7 +12,6 @@ import {
   CART,
   CLIENT_SIGN_IN,
   DASHBOARD,
-  HOME,
   ORDER,
   SELLER_SIGN_IN,
 } from "@/shared/router/router";
@@ -43,13 +42,11 @@ const Header = () => {
       </div>
       <div className="flex gap-6 mt-2 mb-4">
         <div className=" bg-[rgb(194,243,119)] h-20 flex px-5 py-3 rounded-3xl items-center justify-center aspect-square">
-          <Link href={HOME}>
-            <Image
-              className="w-8 h-8"
-              src={logo}
-              alt="logo"
-            />
-          </Link>
+          <Image
+            className="w-8 h-8"
+            src={logo}
+            alt="logo"
+          />
         </div>
         <div className=" bg-[rgb(248,249,254)] h-20 flex justify-between px-5 py-3 rounded-3xl items-center w-[100%]">
           <div className="flex gap-6 font-medium">

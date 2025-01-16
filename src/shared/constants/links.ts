@@ -1,4 +1,4 @@
-import { CATEGORIES, CLIENT_SIGN_IN, MENU } from "../router/router";
+import { CATEGORIES, MENU } from "../router/router";
 
 export const LINKS = [
   {
@@ -9,5 +9,4 @@ export const LINKS = [
     name: "Категории",
     link: CATEGORIES,
   },
-  // { name: "Вход", link: CLIENT_SIGN_IN },
 ];

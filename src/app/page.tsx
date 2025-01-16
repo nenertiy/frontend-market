@@ -1,12 +1,12 @@
 "use client";
 
-import { HOME } from "@/shared/router/router";
+import { MENU } from "@/shared/router/router";
 import { redirect } from "next/navigation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const Page = () => {
   useEffect(() => {
-    redirect(HOME);
+    redirect(MENU);
   });
 };
 

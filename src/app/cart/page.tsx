@@ -47,4 +47,11 @@ const CartPage = () => {
   );
 };
 
-export default ProtectedPage(CartPage, "client");
+// Используем ProtectedPage как обертку
+const CartPageWithProtection = () => (
+  <ProtectedPage user="client">
+    <CartPage />
+  </ProtectedPage>
+);
+
+export default CartPageWithProtection;

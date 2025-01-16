@@ -44,4 +44,10 @@ const OrderPage = () => {
   );
 };
 
-export default ProtectedPage(OrderPage, "client");
+const OrderPageWithProtection = () => {
+  <ProtectedPage user="client">
+    <OrderPage />
+  </ProtectedPage>;
+};
+
+export default OrderPageWithProtection;
