@@ -2,12 +2,11 @@ import Cookies from "js-cookie";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
 export const setToken = (token: string, refreshToken: string | null = null) => {
-  Cookies.set("token", token, { path: "/", secure: true, sameSite: "Strict" });
+  Cookies.set("token", token, { path: "/", sameSite: "Lax" });
   if (refreshToken) {
     Cookies.set("refreshToken", refreshToken, {
       path: "/",
-      secure: true,
-      sameSite: "Strict",
+      sameSite: "Lax",
     });
   }
 };
