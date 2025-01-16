@@ -19,7 +19,6 @@ const ReviewCard: FC<ReviewCardProps> = ({
       <div className="text-sm text-gray-600 font-medium">
         {surname} {name}
       </div>
-      {/* <div className="font-bold text-lg mt-2">Рейтинг: {rating}/5</div> */}
       <ReactStars
         count={5}
         size={20}

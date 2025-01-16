@@ -14,6 +14,7 @@ import { redirect, useParams } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 import ReactStars from "react-stars";
+import SellerCardProfile from "@/entities/seller/ui/SellerCardProfile";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -102,6 +103,10 @@ const ProductPage = () => {
       </div>
 
       <div className="mt-8">
+        <div className="mb-4">
+          {product?.seller && <SellerCardProfile seller={product.seller} />}
+        </div>
+
         <div className="text-xl mb-4">Отзывы</div>
         <div className="space-y-4">
           {product?.review && product.review.length > 0 ? (
