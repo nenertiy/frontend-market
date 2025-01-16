@@ -1,4 +1,5 @@
 import { Review } from "@/entities/review/types";
+import { Seller } from "@/entities/seller/types";
 
 export interface Product {
   id: string;
@@ -13,4 +14,5 @@ export interface Product {
   sellerId: string;
   rating: number;
   review: Review[];
+  seller: Seller;
 }
