@@ -75,4 +75,10 @@ const DashboardPage = () => {
   );
 };
 
-export default ProtectedPage(DashboardPage, "seller");
+const DashboardPageWithProtection = () => {
+  <ProtectedPage user="seller">
+    <DashboardPage />
+  </ProtectedPage>;
+};
+
+export default DashboardPageWithProtection;

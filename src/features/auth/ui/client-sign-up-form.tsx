@@ -1,6 +1,6 @@
 "use client";
 
-import { HOME } from "@/shared/router/router";
+import { MENU } from "@/shared/router/router";
 import Button from "@/shared/ui/Button/Button";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -21,7 +21,7 @@ const ClientSignUpForm = () => {
     const { success } = await authModel.registrationClient(data);
     if (success) {
       toast.success("Успешно зарегистрирован");
-      redirect(HOME);
+      redirect(MENU);
     } else {
       toast.error("Ошибка регистрации");
     }

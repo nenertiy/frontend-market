@@ -1,11 +1,9 @@
-export const HOME = "/home";
 export const CLIENT_SIGN_IN = "/client/sign-in";
 export const CLIENT_SIGN_UP = "/client/sign-up";
 export const SELLER_SIGN_IN = "/seller/sign-in";
 export const SELLER_SIGN_UP = "/seller/sign-up";
 export const MENU = "/menu";
 export const CATEGORIES = "/categories";
-export const PROFILE = "/profile";
 export const CART = "/cart";
 export const ORDER = "/order";
 export const DASHBOARD = "/seller/dashboard";

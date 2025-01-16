@@ -1,6 +1,6 @@
 "use client";
 
-import { HOME } from "@/shared/router/router";
+import { MENU } from "@/shared/router/router";
 import Button from "@/shared/ui/Button/Button";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -18,7 +18,7 @@ const ClientSignInForm = () => {
     const { success } = await authModel.loginClient(data);
     if (success) {
       toast.success("Авторизирован");
-      redirect(HOME);
+      redirect(MENU);
     } else {
       toast.error("Ошибка авторизации");
     }
