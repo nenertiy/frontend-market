@@ -5,6 +5,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --toastify-toast-width: 200px;
+}
+
+@media (width > 850px) {
+  :root {
+    --toastify-toast-width: 320px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
