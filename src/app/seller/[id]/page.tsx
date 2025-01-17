@@ -28,7 +28,7 @@ const SellerPage = () => {
               color2={"#ffd700"}
               value={1}
             />
-            <div>{seller?.rating}</div>
+            <div>{seller?.rating.toFixed(2)}</div>
           </div>
         )}
       </div>
