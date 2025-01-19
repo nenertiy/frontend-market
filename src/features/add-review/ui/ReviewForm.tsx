@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import Button from "@/shared/ui/Button/Button";
 import { toast } from "react-toastify";
+import ReactStars from "react-stars";
 
 interface ReviewFormProps {
   onSubmit: (data: { rating: number; description: string }) => void;
@@ -13,11 +14,11 @@ interface FormValues {
 }
 
 const ReviewForm: FC<ReviewFormProps> = ({ onSubmit }) => {
-  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const { control, register, handleSubmit, reset } = useForm<FormValues>();
 
   const handleFormSubmit: SubmitHandler<FormValues> = (data) => {
     if (data.rating < 1 || data.rating > 5) {
-      toast.error("Пожалуйста, укажите рейтинг от 1 до 5");
+      toast.error("Пожалуйста, укажите рейтинг");
       return;
     }
     onSubmit(data);
@@ -34,18 +35,24 @@ const ReviewForm: FC<ReviewFormProps> = ({ onSubmit }) => {
         placeholder="Напишите свой отзыв"
         {...register("description", { required: "Поле обязательно" })}
       />
-      <input
-        className="w-20 px-2 py-1 border rounded-md text-center focus:outline-none focus:ring-2 focus:ring-[rgb(194,243,119)] bg-[rgb(250,250,254)]"
-        type="number"
-        min={1}
-        max={5}
-        placeholder="Рейтинг"
-        {...register("rating", {
-          required: "Укажите рейтинг",
-          min: { value: 1, message: "Минимальный рейтинг: 1" },
-          max: { value: 5, message: "Максимальный рейтинг: 5" },
-        })}
-      />
+      <div className="flex flex-col gap-2">
+        <label className="text-gray-600 text-sm">Рейтинг:</label>
+        <Controller
+          name="rating"
+          control={control}
+          defaultValue={0}
+          render={({ field }) => (
+            <ReactStars
+              count={5}
+              size={28}
+              value={field.value}
+              onChange={field.onChange}
+              half={false}
+              color2={"#ffd700"}
+            />
+          )}
+        />
+      </div>
       <Button>Оставить отзыв</Button>
     </form>
   );
